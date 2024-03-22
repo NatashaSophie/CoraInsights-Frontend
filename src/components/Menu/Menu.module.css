@@ -1,0 +1,17 @@
+.MenuContainer {
+  @apply bg-white flex w-full px-6 justify-between z-10 fixed bottom-0;
+
+  & > a {
+    @apply w-12 py-2 text-gray-400 flex items-center flex-col;
+
+    & > p {
+      @apply mt-0.5;
+    }
+
+    &.active {
+      @apply text-primary;
+    }
+  }
+
+  box-shadow: 0px 0px 4px rgba(33, 31, 38, 0.2);
+}

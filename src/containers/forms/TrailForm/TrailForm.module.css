@@ -1,0 +1,4 @@
+.container {
+  @apply absolute w-full flex flex-col items-center p-6 top-0 left-0 h-screen bg-gray-50;
+
+}

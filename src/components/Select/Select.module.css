@@ -1,0 +1,71 @@
+.inputContainer {
+  @apply relative;
+
+  & input:-webkit-autofill,
+  & input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+}
+
+.inputContainerFocused {
+  & .label {
+    @apply text-primary;
+  }
+
+  & .rightIcon {
+    @apply text-primary;
+  }
+}
+
+.hasRightIcon {
+  & .input {
+    @apply pr-10;
+  }
+}
+
+.label {
+  @apply text-black transition-all transform-gpu absolute left-3 top-4 text-base;
+}
+
+.labelActive {
+  @apply text-xs font-semibold;
+  transform: translatey(-8px);
+}
+
+.input {
+  @apply text-black bg-gray-100 border-gray-400 w-full rounded-lg pb-[8px] pt-[24px] max-h-14;
+
+  &:hover {
+    @apply border-primary ring-0;
+  }
+
+  &:focus {
+    @apply border-primary ring-0;
+  }
+}
+
+.hasError {
+  & .input {
+    @apply border-red-500 hover:border-red-500 focus:border-red-500 focus:shadow-none;
+  }
+
+  & .labelActive {
+    @apply text-red-500;
+  }
+
+  & .label {
+    @apply text-red-500;
+  }
+
+  & .rightIcon {
+    @apply text-red-500;
+  }
+}
+
+.errorText {
+  @apply mt-1 text-white text-sm font-bold;
+}
+
+.rightIcon {
+  @apply text-black absolute right-3 top-4;
+}

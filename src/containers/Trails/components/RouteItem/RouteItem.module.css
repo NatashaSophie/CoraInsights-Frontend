@@ -1,0 +1,55 @@
+.container {
+  @apply rounded-lg overflow-hidden mx-6;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.imageSection {
+  @apply p-4 relative flex flex-col justify-end;
+  height: 180px;
+
+  &::after {
+    content: '';
+    @apply absolute bottom-0 h-1/2 w-full left-0;
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0) 0%, #111827 100%);
+  }
+
+  & > p {
+    @apply z-20 leading-6 font-bold text-white;
+  }
+}
+
+.middleSection {
+  @apply p-4 flex flex-col gap-4 relative;
+
+  & > div {
+    @apply flex items-center text-gray-700;
+
+    & > p {
+      @apply leading-6 ml-2;
+    }
+
+    &:first-child {
+      &:after {
+        @apply h-3 border-gray-500 absolute top-[42px] left-7 w-[1px];
+        background-image: linear-gradient(#374151 33%, rgba(255,255,255,0) 0%);
+        background-position: right;
+        background-size: 1px 4px;
+        background-repeat: repeat-y;
+        content: '';
+      }
+    }
+  }
+}
+
+.infos {
+  @apply flex p-4 bg-gray-100 text-gray-500 gap-4;
+
+  & > div {
+    @apply flex items-center;
+
+    & > p {
+      @apply ml-1 text-xs leading-5;      
+    }
+  }
+}

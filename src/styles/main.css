@@ -1,0 +1,48 @@
+@tailwind base;
+
+html, body, #__next {
+  @apply w-full h-full bg-gray-100;
+}
+
+html, body, #__next,button, input, optgroup, select, textarea {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  @apply text-white border-none no-underline hover:no-underline focus:no-underline;
+}
+
+a:hover {
+  @apply border-b-2 border-blue-700;
+}
+
+
+select {
+    background-image: unset;
+  }
+
+@tailwind components;
+
+@layer components {
+  .btn {
+    @apply w-full py-3 text-center font-medium rounded-lg;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary;
+  }
+}
+
+@tailwind utilities;
+
+.content p {
+  @apply my-6;
+}
+
+.content ul {
+  @apply my-6;
+}

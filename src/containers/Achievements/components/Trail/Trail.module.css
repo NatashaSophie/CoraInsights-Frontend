@@ -1,0 +1,17 @@
+.container {
+  @apply rounded-lg flex flex-col overflow-hidden;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.infoContainer {
+  @apply text-gray-500 flex gap-4;
+
+  & > p {
+    @apply flex text-sm leading-5 items-center;
+
+    & svg {
+      @apply w-5 h-5 mr-1;
+    }
+  }
+}

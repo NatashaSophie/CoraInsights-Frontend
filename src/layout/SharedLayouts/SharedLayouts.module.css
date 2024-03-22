@@ -1,0 +1,7 @@
+.publicLayoutContainer {
+  @apply relative w-full h-full max-w-lg mx-auto;
+
+  background-image: url("/assets/images/background-img.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
