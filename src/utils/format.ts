@@ -1,5 +1,6 @@
-import { DIFFICULTY_TRANSLATION } from './translations';
 import { RouteDifficulty } from '@/store/routes/slice';
+
+import { DIFFICULTY_TRANSLATION } from './translations';
 
 export const formatRouteDistance = (distance: number) =>
   `${distance.toString().replace('.', ',')} km`;

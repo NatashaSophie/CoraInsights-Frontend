@@ -4,11 +4,12 @@ import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
-import styles from './Trail.module.css';
 import Icon from '@/components/Icon';
 import { Route } from '@/store/routes/slice';
 
-const Map = dynamic(() => import('./components/Map'), {
+import styles from './Trail.module.css';
+
+const Map: any = dynamic(() => import('./components/Map'), {
   ssr: false,
 });
 

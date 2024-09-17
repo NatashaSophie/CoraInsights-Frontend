@@ -5,7 +5,6 @@ import { Form, Formik } from 'formik';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 
-import validationSchema from './validationSchema';
 import Select from '@/components/Select';
 import TextField from '@/components/TextField';
 import UserAvatar from '@/components/UserAvatar';
@@ -17,6 +16,8 @@ import { addAlert } from '@/store/alerts/slice';
 import { userSelector } from '@/store/user/selectors';
 import { convertInputValueToDate } from '@/utils/date';
 import birthdateMask from '@/utils/masks/birthdate';
+
+import validationSchema from './validationSchema';
 
 const EditProfileForm: React.FC = () => {
   const dispatch = useDispatch();

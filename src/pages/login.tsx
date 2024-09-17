@@ -32,12 +32,12 @@ const Login = () => {
         <div className="w-full mt-auto">
           <LoginForm />
         </div>
-        <p
+        {/* <p
           onClick={() => setOpenForgotPassword(true)}
           className="mt-6 underline text-sm font-medium text-white text-center"
         >
           Esqueci minha senha
-        </p>
+        </p> */}
       </div>
     </Main>
   );

@@ -1,8 +1,9 @@
 import React from 'react';
 
+import TrailsContainer from '@/containers/Trails';
+
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
-import TrailsContainer from '@/containers/Trails';
 
 const Trails = () => {
   return (

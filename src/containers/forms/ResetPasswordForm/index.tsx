@@ -4,11 +4,6 @@ import classNames from 'classnames';
 import { Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 
-import {
-  validationSchemaFirstStep,
-  validationSchemaSecondStep,
-  validationSchemaThirdStep,
-} from './validationSchema';
 import Icon from '@/components/Icon';
 import Loading from '@/components/Loading';
 import TextField from '@/components/TextField';
@@ -17,6 +12,12 @@ import {
   useResetPasswordMutation,
 } from '@/graphql/generated/graphql';
 import { addAlert } from '@/store/alerts/slice';
+
+import {
+  validationSchemaFirstStep,
+  validationSchemaSecondStep,
+  validationSchemaThirdStep,
+} from './validationSchema';
 
 const ResetPasswordForm: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   onClose,

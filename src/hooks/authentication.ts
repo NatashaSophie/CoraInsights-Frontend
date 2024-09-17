@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useAppSelector } from './state';
 import client from '@/graphql/client';
 import { userTokenSelector } from '@/store/user/selectors';
+
+import { useAppSelector } from './state';
 
 export const useAuthentication = () => {
   const router = useRouter();

@@ -1,14 +1,15 @@
 import React from 'react';
 
-const Loading: React.FC<{ isLoading?: boolean; className?: string }> = ({
+const Loading: React.FC<{ isLoading?: boolean; children?: React.ReactNode; className?: string; size?: number }> = ({
   isLoading,
   children,
   className = '',
+	size = 24
 }) => {
   return isLoading ? (
     <svg
-      width="24"
-      height="24"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

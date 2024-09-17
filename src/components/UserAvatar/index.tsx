@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 
-import Loading from '../Loading';
 import { UploadMutation, useUploadMutation } from '@/graphql/generated/graphql';
 import { userSelector } from '@/store/user/selectors';
+
+import Loading from '../Loading';
 
 type UserAvatarProps = {
   onUploadNewAvatar?: (uploadData: UploadMutation) => void;

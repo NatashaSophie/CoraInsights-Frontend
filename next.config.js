@@ -1,23 +1,10 @@
-const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache');
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+	reactStrictMode: true,
+	swcMinify: true,
+	images: {
+		unoptimized: true
+	}
+};
 
-module.exports = withPWA({
-  poweredByHeader: false,
-  trailingSlash: true,
-  basePath: '',
-  images: {
-    domains: [
-      'localhost',
-      'caminho-de-cora.herokuapp.com',
-      'res.cloudinary.com',
-    ],
-  },
-  pwa: {
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-    runtimeCaching,
-    buildExcludes: [/middleware-manifest.json$/],
-  },
-  reactStrictMode: true,
-});
+module.exports = nextConfig;

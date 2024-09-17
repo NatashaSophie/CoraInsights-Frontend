@@ -2,10 +2,11 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { Meta } from '../layout/Meta';
-import { Main } from '../templates/Main';
 import Trail from '@/containers/Achievements/components/Trail';
 import { trailsSelector } from '@/store/trails/selectors';
+
+import { Meta } from '../layout/Meta';
+import { Main } from '../templates/Main';
 
 const Conquistas = () => {
   const trails = useSelector(trailsSelector);

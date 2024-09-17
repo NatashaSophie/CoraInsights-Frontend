@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useCallback, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './SharedLayouts.module.css';
 import Menu from '@/components/Menu';
 import { useGetUserQuery } from '@/graphql/generated/graphql';
 import { useAuthentication } from '@/hooks/authentication';
@@ -11,11 +10,13 @@ import { userIdSelector } from '@/store/user/selectors';
 import { setUser, setUserPosition } from '@/store/user/slice';
 import { formatDateToLocalDate } from '@/utils/date';
 
+import styles from './SharedLayouts.module.css';
+
 const positionError = (error: { message: string }) => {
   console.log({ error });
 };
 
-const Authenticated: React.FC = ({ children }) => {
+const Authenticated: React.FC = ({ children }: any) => {
   const { canShowContent } = useAuthentication();
   const [hasGeolocation, setHasGeolocation] = useState(false);
   const dispatch = useDispatch();
@@ -145,19 +146,19 @@ const Authenticated: React.FC = ({ children }) => {
   ) : null;
 };
 
-const Public: React.FC = ({ children }) => (
+const Public: React.FC = ({ children }: any) => (
   <div className={styles.publicLayoutContainer}>
     <div className="w-full h-full">{children}</div>
   </div>
 );
 
-const Clean: React.FC = ({ children }) => (
+const Clean: React.FC = ({ children }: any) => (
   <div className="w-full h-full">{children}</div>
 );
 
 const SharedLayouts: React.FC<{ type: 'authenticated' | 'public' | 'clean' }> =
-  ({ children, type }) => {
-    const LayoutComponent = useMemo(() => {
+  ({ children, type }: any) => {
+    const LayoutComponent: any = useMemo(() => {
       if (type === 'authenticated') {
         return Authenticated;
       }

@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 
-import validationSchema from './validationSchema';
 import Loading from '@/components/Loading';
 import TextField from '@/components/TextField';
 import client from '@/graphql/client';
@@ -11,6 +10,8 @@ import { useLoginMutation } from '@/graphql/generated/graphql';
 import { useAppDispatch } from '@/hooks/state';
 import { addAlert } from '@/store/alerts/slice';
 import { setToken, setUserId } from '@/store/user/slice';
+
+import validationSchema from './validationSchema';
 
 const LoginForm: React.FC = () => {
   const router = useRouter();

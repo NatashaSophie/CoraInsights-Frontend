@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import Icon from '../Icon';
-import styles from './InterestPoint.module.css';
 import { InterestPoint as InterestPointProps } from '@/store/routes/slice';
+
+import styles from './InterestPoint.module.css';
+import Icon from '../Icon';
+
 
 const InterestPoint: React.FC<InterestPointProps> = (interestPoint) => {
   const [isOpen, setIsOpen] = useState(false);

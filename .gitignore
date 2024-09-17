@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+package-lock.json
 
 # testing
 /coverage
@@ -11,9 +12,13 @@
 # next.js
 /.next
 /out
+**/public/workbox-*.js
+**/public/sw.js*
+**/public/worker-*.js
 
 # production
 /build
+/android
 
 # misc
 .DS_Store
@@ -26,10 +31,19 @@ yarn-debug.log*
 yarn-error.log*
 
 # dotenv local files
-.env*.local
+.env
+.env.local
+.env.prod
 
 # local folder
 local
 
 # vercel
 .vercel
+
+# misc
+*.7z
+.vscode
+
+# Capacitor
+capacitor.config.json

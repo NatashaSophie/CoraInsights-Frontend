@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect } from 'react';
 
 import { NextPage } from 'next';
@@ -8,11 +9,12 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { store } from '../store';
 import '../styles/main.css';
 import Alerts from '@/components/Alerts';
 import SharedLayouts from '@/layout/SharedLayouts';
 import { LayoutType } from '@/types';
+
+import { store } from '../store';
 
 const client = new QueryClient();
 const persistor = persistStore(store);

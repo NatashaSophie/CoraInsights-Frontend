@@ -3,8 +3,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import cs from 'classnames';
 import { useField } from 'formik';
 
-import Icon from '../Icon';
 import styles from './Select.module.css';
+import Icon from '../Icon';
 
 interface ISelect extends React.InputHTMLAttributes<HTMLSelectElement> {
   label: string;

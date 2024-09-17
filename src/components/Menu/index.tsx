@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Icon, { IconsNames } from '../Icon';
 import styles from './Menu.module.css';
+import Icon, { IconsNames } from '../Icon';
 
 const menuItems: {
   name: string;

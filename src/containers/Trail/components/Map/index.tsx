@@ -8,7 +8,6 @@ import ReactLeafletKml from 'react-leaflet-kml';
 import { useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 
-import styles from './Map.module.css';
 import Icon from '@/components/Icon';
 import InterestPoint from '@/components/InterestPoint';
 import Loading from '@/components/Loading';
@@ -30,6 +29,8 @@ import {
 } from '@/store/trails/selectors';
 import { userPositionSelector } from '@/store/user/selectors';
 import { getDistanceFromLatLonInKm } from '@/utils/distance';
+
+import styles from './Map.module.css';
 
 const iconFlag = new LeafletIcon({
   iconUrl: '/assets/map-pin.svg',

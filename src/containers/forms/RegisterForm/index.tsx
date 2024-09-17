@@ -3,7 +3,6 @@ import React from 'react';
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 
-import validationSchema from './validationSchema';
 import Loading from '@/components/Loading';
 import Select from '@/components/Select';
 import TextField from '@/components/TextField';
@@ -15,6 +14,8 @@ import { useAppDispatch } from '@/hooks/state';
 import { addAlert } from '@/store/alerts/slice';
 import { convertInputValueToDate } from '@/utils/date';
 import birthdateMask from '@/utils/masks/birthdate';
+
+import validationSchema from './validationSchema';
 
 const RegisterForm: React.FC = () => {
   const router = useRouter();

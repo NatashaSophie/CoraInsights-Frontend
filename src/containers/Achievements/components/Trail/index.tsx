@@ -5,10 +5,11 @@ import { differenceInMinutes } from 'date-fns';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
-import styles from './Trail.module.css';
 import Icon from '@/components/Icon';
 import { routesSelector } from '@/store/routes/selectors';
 import { Trail as TrailProps, TrailRoute } from '@/store/trails/slice';
+
+import styles from './Trail.module.css';
 
 const getSpededTime = (trailRoute: TrailRoute) => {
   const startedDate = new Date(trailRoute.startedAt);

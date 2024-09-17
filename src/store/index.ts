@@ -3,7 +3,9 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import alertsReducer from './alerts/slice';
+import distanceReducer from './distance/slice';
 import routesReducer from './routes/slice';
+import timerReducer from './timer/slice';
 import trailsReducer from './trails/slice';
 import userReducer from './user/slice';
 
@@ -12,6 +14,8 @@ const reducers = combineReducers({
   alerts: alertsReducer,
   trails: trailsReducer,
   routes: routesReducer,
+	timer: timerReducer,
+	distance: distanceReducer
 });
 
 const persistConfig = {

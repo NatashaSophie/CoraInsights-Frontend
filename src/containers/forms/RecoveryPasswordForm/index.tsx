@@ -2,8 +2,9 @@ import React from 'react';
 
 import { Form, Formik } from 'formik';
 
-import validationSchema from './validationSchema';
 import TextField from '@/components/TextField';
+
+import validationSchema from './validationSchema';
 
 const RecoveryPasswordForm: React.FC = () => {
   return (

@@ -3,8 +3,8 @@ import React, { CSSProperties, useEffect, useMemo, useState } from 'react';
 import cs from 'classnames';
 import { useField } from 'formik';
 
-import Icon, { IconsNames } from '../Icon';
 import styles from './TextField.module.css';
+import Icon, { IconsNames } from '../Icon';
 
 interface ITextField extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;

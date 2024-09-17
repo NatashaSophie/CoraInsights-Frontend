@@ -1,4 +1,4 @@
-schema: http://localhost:1337/graphql
+schema: ${NEXT_PUBLIC_GRAPHQL_HOST}
 documents: "src/graphql/queries.ts"
 generates:
   ./src/graphql/generated/graphql.ts:

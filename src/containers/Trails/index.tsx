@@ -2,8 +2,6 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import TrailForm from '../forms/TrailForm';
-import RouteItem from './components/RouteItem';
 import { useGetRoutesQuery } from '@/graphql/generated/graphql';
 import { routesSelector } from '@/store/routes/selectors';
 import { Route, setRoutes, InterestPoint } from '@/store/routes/slice';
@@ -17,6 +15,9 @@ import {
   formatRouteDistance,
   formatRouteTime,
 } from '@/utils/format';
+
+import RouteItem from './components/RouteItem';
+import TrailForm from '../forms/TrailForm';
 
 const Trails: React.FC = () => {
   const dispatch = useDispatch();

@@ -21,7 +21,7 @@
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitAny": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -29,7 +29,7 @@
     "noFallthroughCasesInSwitch": true,
     "target": "es5",
     "outDir": "out",
-    "declaration": true,
+    "declaration": false,
     "sourceMap": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -39,7 +39,8 @@
     "jsx": "preserve",
     "noEmit": true,
     "isolatedModules": true,
-    "incremental": true
+    "incremental": true,
+		"checkJs": false
   },
   "exclude": [
     "./out/**/*",

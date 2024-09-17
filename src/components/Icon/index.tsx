@@ -34,53 +34,59 @@ const CloseIcon = dynamic(() => import('./icons/Close'));
 const ErrorIcon = dynamic(() => import('./icons/Error'));
 const SuccessIcon = dynamic(() => import('./icons/Success'));
 const DownloadIcon = dynamic(() => import('./icons/Download'));
+const LocationIcon = dynamic(() => import('./icons/Location'));
+const InfoIcon = dynamic(() => import('./icons/Info'));
+const RefreshIcon = dynamic(() => import('./icons/Refresh'));
 
 const Icons = {
-  email: EmailIcon,
-  lock: LockIcon,
-  account: AccountIcon,
-  calendar: CalendarIcon,
-  alertCircle: AlertCircleIcon,
-  menu: MenuIcon,
-  power: PowerIcon,
-  success: SuccessIcon,
-  download: DownloadIcon,
-  error: ErrorIcon,
-  close: CloseIcon,
-  trophy: TrophyIcon,
-  trophy2: Trophy2Icon,
-  trophy3: Trophy3Icon,
-  marker: MarkerIcon,
-  flag: FlagIcon,
-  information: InformationIcon,
-  home: HomeIcon,
-  cog: CogIcon,
-  reader: ReaderIcon,
-  chevronDown: ChevronDownIcon,
-  chevronLeft: ChevronLeftIcon,
-  user: UserIcon,
-  award: AwardIcon,
-  walk: WalkIcon,
-  distance: DistanceIcon,
-  clock: ClockIcon,
-  powerLevel: PowerLevelIcon,
-  pin: PinIcon,
-  squarePin: SquarePinIcon,
-  map: MapIcon,
-  crosshair: CrosshairIcon,
+	email: EmailIcon,
+	lock: LockIcon,
+	account: AccountIcon,
+	calendar: CalendarIcon,
+	alertCircle: AlertCircleIcon,
+	menu: MenuIcon,
+	power: PowerIcon,
+	success: SuccessIcon,
+	download: DownloadIcon,
+	error: ErrorIcon,
+	close: CloseIcon,
+	trophy: TrophyIcon,
+	trophy2: Trophy2Icon,
+	trophy3: Trophy3Icon,
+	marker: MarkerIcon,
+	flag: FlagIcon,
+	information: InformationIcon,
+	home: HomeIcon,
+	cog: CogIcon,
+	reader: ReaderIcon,
+	chevronDown: ChevronDownIcon,
+	chevronLeft: ChevronLeftIcon,
+	user: UserIcon,
+	award: AwardIcon,
+	walk: WalkIcon,
+	distance: DistanceIcon,
+	clock: ClockIcon,
+	powerLevel: PowerLevelIcon,
+	pin: PinIcon,
+	squarePin: SquarePinIcon,
+	map: MapIcon,
+	crosshair: CrosshairIcon,
+	location: LocationIcon,
+	refresh: RefreshIcon,
+	info: InfoIcon
 } as const;
 
 export type IconsNames = keyof typeof Icons;
 
 type IconProps = {
-  name: IconsNames;
-  className?: string;
+	name: IconsNames;
+	className?: string;
 };
 
 const Icon: React.FC<IconProps> = ({ name, className }) => {
-  const NewIcon = useMemo(() => Icons[name], [name]);
+	const NewIcon: any = useMemo(() => Icons[name], [name]);
 
-  return <NewIcon className={`${className || 'fill-current'}`} />;
+	return <NewIcon className={`${className || 'fill-current'}`} />;
 };
 
 export default Icon;
