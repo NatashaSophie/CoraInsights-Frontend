@@ -7,6 +7,13 @@ export const CREATE_USER = gql`
     $password: String!
     $birthdate: Date!
     $sex: ENUM_USERSPERMISSIONSUSER_SEX!
+    $userType: ENUM_USERSPERMISSIONSUSER_USERTYPE
+    $organizationType: ENUM_USERSPERMISSIONSUSER_ORGANIZATIONTYPE
+    $organizationName: String
+    $businessName: String
+    $businessType: String
+    $businessAddress: String
+    $businessPhone: String
   ) {
     createUser(
       input: {
@@ -17,6 +24,13 @@ export const CREATE_USER = gql`
           password: $password
           birthdate: $birthdate
           sex: $sex
+          userType: $userType
+          organizationType: $organizationType
+          organizationName: $organizationName
+          businessName: $businessName
+          businessType: $businessType
+          businessAddress: $businessAddress
+          businessPhone: $businessPhone
         }
       }
     ) {
@@ -129,6 +143,20 @@ export const LOGIN = gql`
       jwt
       user {
         id
+        name
+        email
+        userType
+        organizationType
+        organizationName
+        businessName
+        merchantApproved
+        merchantApprovedBy
+        merchantApprovedAt
+        role {
+          id
+          name
+          type
+        }
       }
     }
   }

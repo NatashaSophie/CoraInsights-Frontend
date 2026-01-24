@@ -4,6 +4,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Maybe } from '@/graphql/generated/graphql';
 import { Location } from '@/types';
 
+export type UserType = 'pilgrim' | 'manager' | 'merchant' | 'admin';
+export type OrganizationType = 'government' | 'trail_management' | 'none';
+
 type User = {
   id?: string;
   name?: string;
@@ -14,6 +17,18 @@ type User = {
     __typename?: 'UploadFile' | undefined;
     url: string;
   }>;
+  userType?: UserType;
+  organizationType?: OrganizationType;
+  organizationName?: string;
+  businessName?: string;
+  merchantApproved?: boolean;
+  merchantApprovedBy?: string;
+  merchantApprovedAt?: string;
+  role?: {
+    id: string;
+    name: string;
+    type: string;
+  };
 };
 
 export interface UserState {
