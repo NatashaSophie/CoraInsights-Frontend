@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 module.exports = {
-  mode: 'jit',
+  // mode: 'jit', // Temporariamente desabilitado
   purge: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: false,
   theme: {

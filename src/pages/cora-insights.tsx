@@ -29,8 +29,13 @@ const CoraInsights = () => {
             </p>
           </div>
 
-          {/* Login Button */}
-          <div className="flex justify-end mb-6">
+          {/* Login and Register Buttons */}
+          <div className="flex justify-end gap-4 mb-6">
+            <Link href="/cadastro">
+              <a className="btn btn-secondary px-6 py-2">
+                Criar Conta
+              </a>
+            </Link>
             <Link href="/login">
               <a className="btn btn-primary px-6 py-2">
                 Fazer Login

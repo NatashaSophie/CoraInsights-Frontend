@@ -33,7 +33,7 @@
 }
 
 .input {
-  @apply text-black bg-white border-gray-400 w-full rounded-lg pb-[8px] pt-[24px] max-h-14;
+  @apply text-black bg-white border-gray-400 w-full rounded-lg pb-2 pt-6 max-h-14;
 
   &:hover {
     @apply border-primary ring-0;

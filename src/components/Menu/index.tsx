@@ -32,7 +32,15 @@ const menuItems: {
 ];
 
 const Menu: React.FC = () => {
-  const { pathname } = useRouter();
+  const { pathname, push } = useRouter();
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+      sessionStorage.clear();
+      push('/login');
+    }
+  };
 
   return (
     <div className={styles.MenuContainer}>
@@ -50,6 +58,14 @@ const Menu: React.FC = () => {
           </a>
         </Link>
       ))}
+      <button
+        onClick={handleLogout}
+        className="flex flex-col items-center justify-center text-white/70 hover:text-white transition-colors"
+        title="Sair"
+      >
+        <Icon name="logout" className="stroke-current" />
+        <p className="text-current text-xs">Sair</p>
+      </button>
     </div>
   );
 };

@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
-
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from 'react-query';
 import { fetcher } from '@/graphql/client';
-
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -14,17 +12,11 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: any;
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** The `Long` scalar type represents 52-bit integers */
   Long: any;
-  /** A time string with format: HH:mm:ss.SSS */
   Time: any;
-  /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
 
@@ -106,19 +98,19 @@ export type CertificateGroupBy = {
 };
 
 export type CertificateInput = {
-  code?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  file?: Maybe<Scalars['String']>;
-  trail?: Maybe<Scalars['ID']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  code?: InputMaybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  file?: InputMaybe<Scalars['String']>;
+  trail?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type CheckpointInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  estabelecimentos?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  estabelecimentos?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   location: ComponentGeneralLocationInput;
   name: Scalars['String'];
-  updated_by?: Maybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type Checkpoints = {
@@ -133,10 +125,10 @@ export type Checkpoints = {
 
 
 export type CheckpointsEstabelecimentosArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type CheckpointsAggregator = {
@@ -200,9 +192,9 @@ export type ComponentGeneralAvaliation = {
 };
 
 export type ComponentGeneralAvaliationInput = {
-  comment?: Maybe<Scalars['String']>;
-  rate?: Maybe<Scalars['Float']>;
-  user?: Maybe<Scalars['ID']>;
+  comment?: InputMaybe<Scalars['String']>;
+  rate?: InputMaybe<Scalars['Float']>;
+  user?: InputMaybe<Scalars['ID']>;
 };
 
 export type ComponentGeneralLocation = {
@@ -241,9 +233,21 @@ export enum Enum_Trails_Modality {
   Foot = 'foot'
 }
 
+export enum Enum_Userspermissionsuser_Organizationtype {
+  Government = 'government',
+  None = 'none',
+  TrailManagement = 'trail_management'
+}
+
 export enum Enum_Userspermissionsuser_Sex {
   Female = 'Female',
   Male = 'Male'
+}
+
+export enum Enum_Userspermissionsuser_Usertype {
+  Manager = 'manager',
+  Merchant = 'merchant',
+  Pilgrim = 'pilgrim'
 }
 
 export type Establishment = {
@@ -251,12 +255,26 @@ export type Establishment = {
   address?: Maybe<Scalars['String']>;
   category: Scalars['String'];
   created_at: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  images?: Maybe<Array<Maybe<UploadFile>>>;
+  isActive?: Maybe<Scalars['Boolean']>;
   location?: Maybe<ComponentGeneralLocation>;
   name: Scalars['String'];
+  openingHours?: Maybe<Scalars['String']>;
+  owner?: Maybe<UsersPermissionsUser>;
   phone?: Maybe<Scalars['String']>;
+  services?: Maybe<Scalars['JSON']>;
   updated_at: Scalars['DateTime'];
+};
+
+
+export type EstablishmentImagesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type EstablishmentAggregator = {
@@ -290,6 +308,12 @@ export type EstablishmentConnectionCreated_At = {
   key?: Maybe<Scalars['DateTime']>;
 };
 
+export type EstablishmentConnectionDescription = {
+  __typename?: 'EstablishmentConnectionDescription';
+  connection?: Maybe<EstablishmentConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
 export type EstablishmentConnectionEmail = {
   __typename?: 'EstablishmentConnectionEmail';
   connection?: Maybe<EstablishmentConnection>;
@@ -300,6 +324,12 @@ export type EstablishmentConnectionId = {
   __typename?: 'EstablishmentConnectionId';
   connection?: Maybe<EstablishmentConnection>;
   key?: Maybe<Scalars['ID']>;
+};
+
+export type EstablishmentConnectionIsActive = {
+  __typename?: 'EstablishmentConnectionIsActive';
+  connection?: Maybe<EstablishmentConnection>;
+  key?: Maybe<Scalars['Boolean']>;
 };
 
 export type EstablishmentConnectionLocation = {
@@ -314,10 +344,28 @@ export type EstablishmentConnectionName = {
   key?: Maybe<Scalars['String']>;
 };
 
+export type EstablishmentConnectionOpeningHours = {
+  __typename?: 'EstablishmentConnectionOpeningHours';
+  connection?: Maybe<EstablishmentConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type EstablishmentConnectionOwner = {
+  __typename?: 'EstablishmentConnectionOwner';
+  connection?: Maybe<EstablishmentConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
 export type EstablishmentConnectionPhone = {
   __typename?: 'EstablishmentConnectionPhone';
   connection?: Maybe<EstablishmentConnection>;
   key?: Maybe<Scalars['String']>;
+};
+
+export type EstablishmentConnectionServices = {
+  __typename?: 'EstablishmentConnectionServices';
+  connection?: Maybe<EstablishmentConnection>;
+  key?: Maybe<Scalars['JSON']>;
 };
 
 export type EstablishmentConnectionUpdated_At = {
@@ -331,49 +379,60 @@ export type EstablishmentGroupBy = {
   address?: Maybe<Array<Maybe<EstablishmentConnectionAddress>>>;
   category?: Maybe<Array<Maybe<EstablishmentConnectionCategory>>>;
   created_at?: Maybe<Array<Maybe<EstablishmentConnectionCreated_At>>>;
+  description?: Maybe<Array<Maybe<EstablishmentConnectionDescription>>>;
   email?: Maybe<Array<Maybe<EstablishmentConnectionEmail>>>;
   id?: Maybe<Array<Maybe<EstablishmentConnectionId>>>;
+  isActive?: Maybe<Array<Maybe<EstablishmentConnectionIsActive>>>;
   location?: Maybe<Array<Maybe<EstablishmentConnectionLocation>>>;
   name?: Maybe<Array<Maybe<EstablishmentConnectionName>>>;
+  openingHours?: Maybe<Array<Maybe<EstablishmentConnectionOpeningHours>>>;
+  owner?: Maybe<Array<Maybe<EstablishmentConnectionOwner>>>;
   phone?: Maybe<Array<Maybe<EstablishmentConnectionPhone>>>;
+  services?: Maybe<Array<Maybe<EstablishmentConnectionServices>>>;
   updated_at?: Maybe<Array<Maybe<EstablishmentConnectionUpdated_At>>>;
 };
 
 export type EstablishmentInput = {
-  address?: Maybe<Scalars['String']>;
+  address?: InputMaybe<Scalars['String']>;
   category: Scalars['String'];
-  created_by?: Maybe<Scalars['ID']>;
-  email?: Maybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  isActive?: InputMaybe<Scalars['Boolean']>;
   location: ComponentGeneralLocationInput;
   name: Scalars['String'];
-  phone?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  openingHours?: InputMaybe<Scalars['String']>;
+  owner?: InputMaybe<Scalars['ID']>;
+  phone?: InputMaybe<Scalars['String']>;
+  services?: InputMaybe<Scalars['JSON']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type FileInfoInput = {
-  alternativeText?: Maybe<Scalars['String']>;
-  caption?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
+  alternativeText?: InputMaybe<Scalars['String']>;
+  caption?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type FileInput = {
-  alternativeText?: Maybe<Scalars['String']>;
-  caption?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  ext?: Maybe<Scalars['String']>;
-  formats?: Maybe<Scalars['JSON']>;
+  alternativeText?: InputMaybe<Scalars['String']>;
+  caption?: InputMaybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  ext?: InputMaybe<Scalars['String']>;
+  formats?: InputMaybe<Scalars['JSON']>;
   hash: Scalars['String'];
-  height?: Maybe<Scalars['Int']>;
+  height?: InputMaybe<Scalars['Int']>;
   mime: Scalars['String'];
   name: Scalars['String'];
-  previewUrl?: Maybe<Scalars['String']>;
+  previewUrl?: InputMaybe<Scalars['String']>;
   provider: Scalars['String'];
-  provider_metadata?: Maybe<Scalars['JSON']>;
-  related?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  provider_metadata?: InputMaybe<Scalars['JSON']>;
+  related?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   size: Scalars['Float'];
-  updated_by?: Maybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
   url: Scalars['String'];
-  width?: Maybe<Scalars['Int']>;
+  width?: InputMaybe<Scalars['Int']>;
 };
 
 export type I18NLocale = {
@@ -390,13 +449,13 @@ export type InputId = {
 };
 
 export type LocaleInput = {
-  code?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  code?: InputMaybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
-export type Morph = Certificate | CertificateAggregator | CertificateConnection | CertificateConnectionCode | CertificateConnectionCreated_At | CertificateConnectionFile | CertificateConnectionId | CertificateConnectionTrail | CertificateConnectionUpdated_At | CertificateGroupBy | Checkpoints | CheckpointsAggregator | CheckpointsConnection | CheckpointsConnectionCreated_At | CheckpointsConnectionId | CheckpointsConnectionLocation | CheckpointsConnectionName | CheckpointsConnectionUpdated_At | CheckpointsGroupBy | ComponentGeneralAvaliation | ComponentGeneralLocation | ComponentGeneralPlace | Establishment | EstablishmentAggregator | EstablishmentConnection | EstablishmentConnectionAddress | EstablishmentConnectionCategory | EstablishmentConnectionCreated_At | EstablishmentConnectionEmail | EstablishmentConnectionId | EstablishmentConnectionLocation | EstablishmentConnectionName | EstablishmentConnectionPhone | EstablishmentConnectionUpdated_At | EstablishmentGroupBy | I18NLocale | TrailParts | TrailPartsAggregator | TrailPartsAggregatorAvg | TrailPartsAggregatorMax | TrailPartsAggregatorMin | TrailPartsAggregatorSum | TrailPartsConnection | TrailPartsConnectionCoverImage | TrailPartsConnectionCreated_At | TrailPartsConnectionDescription | TrailPartsConnectionDifficulty | TrailPartsConnectionDistance | TrailPartsConnectionFromCheckpoint | TrailPartsConnectionId | TrailPartsConnectionName | TrailPartsConnectionSlug | TrailPartsConnectionTime | TrailPartsConnectionToCheckpoint | TrailPartsConnectionUpdated_At | TrailPartsGroupBy | TrailRoute | TrailRouteAggregator | TrailRouteConnection | TrailRouteConnectionCreated_At | TrailRouteConnectionFinishedAt | TrailRouteConnectionId | TrailRouteConnectionPublished_At | TrailRouteConnectionRoute | TrailRouteConnectionTrackedPath | TrailRouteConnectionTrail | TrailRouteConnectionUpdated_At | TrailRouteGroupBy | Trails | TrailsAggregator | TrailsConnection | TrailsConnectionCertificate | TrailsConnectionCreated_At | TrailsConnectionFinishedAt | TrailsConnectionId | TrailsConnectionInversePaths | TrailsConnectionModality | TrailsConnectionStartedAt | TrailsConnectionUpdated_At | TrailsConnectionUser | TrailsGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionAvatar | UsersPermissionsUserConnectionBirthdate | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionName | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionSex | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | CreateCertificatePayload | CreateCheckpointPayload | CreateEstablishmentPayload | CreateRolePayload | CreateTrailPartPayload | CreateTrailPayload | CreateTrailRoutePayload | CreateUserPayload | DeleteCertificatePayload | DeleteCheckpointPayload | DeleteEstablishmentPayload | DeleteFilePayload | DeleteRolePayload | DeleteTrailPartPayload | DeleteTrailPayload | DeleteTrailRoutePayload | DeleteUserPayload | UpdateCertificatePayload | UpdateCheckpointPayload | UpdateEstablishmentPayload | UpdateRolePayload | UpdateTrailPartPayload | UpdateTrailPayload | UpdateTrailRoutePayload | UpdateUserPayload;
+export type Morph = Certificate | CertificateAggregator | CertificateConnection | CertificateConnectionCode | CertificateConnectionCreated_At | CertificateConnectionFile | CertificateConnectionId | CertificateConnectionTrail | CertificateConnectionUpdated_At | CertificateGroupBy | Checkpoints | CheckpointsAggregator | CheckpointsConnection | CheckpointsConnectionCreated_At | CheckpointsConnectionId | CheckpointsConnectionLocation | CheckpointsConnectionName | CheckpointsConnectionUpdated_At | CheckpointsGroupBy | ComponentGeneralAvaliation | ComponentGeneralLocation | ComponentGeneralPlace | Establishment | EstablishmentAggregator | EstablishmentConnection | EstablishmentConnectionAddress | EstablishmentConnectionCategory | EstablishmentConnectionCreated_At | EstablishmentConnectionDescription | EstablishmentConnectionEmail | EstablishmentConnectionId | EstablishmentConnectionIsActive | EstablishmentConnectionLocation | EstablishmentConnectionName | EstablishmentConnectionOpeningHours | EstablishmentConnectionOwner | EstablishmentConnectionPhone | EstablishmentConnectionServices | EstablishmentConnectionUpdated_At | EstablishmentGroupBy | I18NLocale | TrailParts | TrailPartsAggregator | TrailPartsAggregatorAvg | TrailPartsAggregatorMax | TrailPartsAggregatorMin | TrailPartsAggregatorSum | TrailPartsConnection | TrailPartsConnectionCoverImage | TrailPartsConnectionCreated_At | TrailPartsConnectionDescription | TrailPartsConnectionDifficulty | TrailPartsConnectionDistance | TrailPartsConnectionFromCheckpoint | TrailPartsConnectionId | TrailPartsConnectionName | TrailPartsConnectionSlug | TrailPartsConnectionTime | TrailPartsConnectionToCheckpoint | TrailPartsConnectionUpdated_At | TrailPartsGroupBy | TrailRoute | TrailRouteAggregator | TrailRouteConnection | TrailRouteConnectionCreated_At | TrailRouteConnectionFinishedAt | TrailRouteConnectionId | TrailRouteConnectionPublished_At | TrailRouteConnectionRoute | TrailRouteConnectionTrackedPath | TrailRouteConnectionTrail | TrailRouteConnectionUpdated_At | TrailRouteGroupBy | Trails | TrailsAggregator | TrailsConnection | TrailsConnectionCertificate | TrailsConnectionCreated_At | TrailsConnectionFinishedAt | TrailsConnectionId | TrailsConnectionInversePaths | TrailsConnectionModality | TrailsConnectionStartedAt | TrailsConnectionUpdated_At | TrailsConnectionUser | TrailsGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionAvatar | UsersPermissionsUserConnectionBirthdate | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionBusinessAddress | UsersPermissionsUserConnectionBusinessName | UsersPermissionsUserConnectionBusinessPhone | UsersPermissionsUserConnectionBusinessType | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionMerchantApproved | UsersPermissionsUserConnectionMerchantApprovedAt | UsersPermissionsUserConnectionMerchantApprovedBy | UsersPermissionsUserConnectionMerchantRejectedReason | UsersPermissionsUserConnectionName | UsersPermissionsUserConnectionNickname | UsersPermissionsUserConnectionOrganizationName | UsersPermissionsUserConnectionOrganizationType | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionSex | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUserType | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | CreateCertificatePayload | CreateCheckpointPayload | CreateEstablishmentPayload | CreateRolePayload | CreateTrailPartPayload | CreateTrailPayload | CreateTrailRoutePayload | CreateUserPayload | DeleteCertificatePayload | DeleteCheckpointPayload | DeleteEstablishmentPayload | DeleteFilePayload | DeleteRolePayload | DeleteTrailPartPayload | DeleteTrailPayload | DeleteTrailRoutePayload | DeleteUserPayload | UpdateCertificatePayload | UpdateCheckpointPayload | UpdateEstablishmentPayload | UpdateRolePayload | UpdateTrailPartPayload | UpdateTrailPayload | UpdateTrailRoutePayload | UpdateUserPayload;
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -444,87 +503,87 @@ export type Mutation = {
 
 
 export type MutationCreateCertificateArgs = {
-  input?: Maybe<CreateCertificateInput>;
+  input?: InputMaybe<CreateCertificateInput>;
 };
 
 
 export type MutationCreateCheckpointArgs = {
-  input?: Maybe<CreateCheckpointInput>;
+  input?: InputMaybe<CreateCheckpointInput>;
 };
 
 
 export type MutationCreateEstablishmentArgs = {
-  input?: Maybe<CreateEstablishmentInput>;
+  input?: InputMaybe<CreateEstablishmentInput>;
 };
 
 
 export type MutationCreateRoleArgs = {
-  input?: Maybe<CreateRoleInput>;
+  input?: InputMaybe<CreateRoleInput>;
 };
 
 
 export type MutationCreateTrailArgs = {
-  input?: Maybe<CreateTrailInput>;
+  input?: InputMaybe<CreateTrailInput>;
 };
 
 
 export type MutationCreateTrailPartArgs = {
-  input?: Maybe<CreateTrailPartInput>;
+  input?: InputMaybe<CreateTrailPartInput>;
 };
 
 
 export type MutationCreateTrailRouteArgs = {
-  input?: Maybe<CreateTrailRouteInput>;
+  input?: InputMaybe<CreateTrailRouteInput>;
 };
 
 
 export type MutationCreateUserArgs = {
-  input?: Maybe<CreateUserInput>;
+  input?: InputMaybe<CreateUserInput>;
 };
 
 
 export type MutationDeleteCertificateArgs = {
-  input?: Maybe<DeleteCertificateInput>;
+  input?: InputMaybe<DeleteCertificateInput>;
 };
 
 
 export type MutationDeleteCheckpointArgs = {
-  input?: Maybe<DeleteCheckpointInput>;
+  input?: InputMaybe<DeleteCheckpointInput>;
 };
 
 
 export type MutationDeleteEstablishmentArgs = {
-  input?: Maybe<DeleteEstablishmentInput>;
+  input?: InputMaybe<DeleteEstablishmentInput>;
 };
 
 
 export type MutationDeleteFileArgs = {
-  input?: Maybe<DeleteFileInput>;
+  input?: InputMaybe<DeleteFileInput>;
 };
 
 
 export type MutationDeleteRoleArgs = {
-  input?: Maybe<DeleteRoleInput>;
+  input?: InputMaybe<DeleteRoleInput>;
 };
 
 
 export type MutationDeleteTrailArgs = {
-  input?: Maybe<DeleteTrailInput>;
+  input?: InputMaybe<DeleteTrailInput>;
 };
 
 
 export type MutationDeleteTrailPartArgs = {
-  input?: Maybe<DeleteTrailPartInput>;
+  input?: InputMaybe<DeleteTrailPartInput>;
 };
 
 
 export type MutationDeleteTrailRouteArgs = {
-  input?: Maybe<DeleteTrailRouteInput>;
+  input?: InputMaybe<DeleteTrailRouteInput>;
 };
 
 
 export type MutationDeleteUserArgs = {
-  input?: Maybe<DeleteUserInput>;
+  input?: InputMaybe<DeleteUserInput>;
 };
 
 
@@ -544,11 +603,11 @@ export type MutationLoginArgs = {
 
 
 export type MutationMultipleUploadArgs = {
-  field?: Maybe<Scalars['String']>;
-  files: Array<Maybe<Scalars['Upload']>>;
-  ref?: Maybe<Scalars['String']>;
-  refId?: Maybe<Scalars['ID']>;
-  source?: Maybe<Scalars['String']>;
+  field?: InputMaybe<Scalars['String']>;
+  files: Array<InputMaybe<Scalars['Upload']>>;
+  ref?: InputMaybe<Scalars['String']>;
+  refId?: InputMaybe<Scalars['ID']>;
+  source?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -565,17 +624,17 @@ export type MutationResetPasswordArgs = {
 
 
 export type MutationUpdateCertificateArgs = {
-  input?: Maybe<UpdateCertificateInput>;
+  input?: InputMaybe<UpdateCertificateInput>;
 };
 
 
 export type MutationUpdateCheckpointArgs = {
-  input?: Maybe<UpdateCheckpointInput>;
+  input?: InputMaybe<UpdateCheckpointInput>;
 };
 
 
 export type MutationUpdateEstablishmentArgs = {
-  input?: Maybe<UpdateEstablishmentInput>;
+  input?: InputMaybe<UpdateEstablishmentInput>;
 };
 
 
@@ -586,37 +645,37 @@ export type MutationUpdateFileInfoArgs = {
 
 
 export type MutationUpdateRoleArgs = {
-  input?: Maybe<UpdateRoleInput>;
+  input?: InputMaybe<UpdateRoleInput>;
 };
 
 
 export type MutationUpdateTrailArgs = {
-  input?: Maybe<UpdateTrailInput>;
+  input?: InputMaybe<UpdateTrailInput>;
 };
 
 
 export type MutationUpdateTrailPartArgs = {
-  input?: Maybe<UpdateTrailPartInput>;
+  input?: InputMaybe<UpdateTrailPartInput>;
 };
 
 
 export type MutationUpdateTrailRouteArgs = {
-  input?: Maybe<UpdateTrailRouteInput>;
+  input?: InputMaybe<UpdateTrailRouteInput>;
 };
 
 
 export type MutationUpdateUserArgs = {
-  input?: Maybe<UpdateUserInput>;
+  input?: InputMaybe<UpdateUserInput>;
 };
 
 
 export type MutationUploadArgs = {
-  field?: Maybe<Scalars['String']>;
+  field?: InputMaybe<Scalars['String']>;
   file: Scalars['Upload'];
-  info?: Maybe<FileInfoInput>;
-  ref?: Maybe<Scalars['String']>;
-  refId?: Maybe<Scalars['ID']>;
-  source?: Maybe<Scalars['String']>;
+  info?: InputMaybe<FileInfoInput>;
+  ref?: InputMaybe<Scalars['String']>;
+  refId?: InputMaybe<Scalars['ID']>;
+  source?: InputMaybe<Scalars['String']>;
 };
 
 export enum PublicationState {
@@ -659,239 +718,239 @@ export type Query = {
 
 export type QueryCertificateArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryCertificatesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryCertificatesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryCheckpointArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryCheckpointsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryCheckpointsConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryEstablishmentArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryEstablishmentsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryEstablishmentsConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryFilesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryFilesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryRoleArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryRolesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryRolesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryTrailArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryTrailPartArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryTrailPartsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryTrailPartsConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryTrailRouteArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryTrailRoutesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryTrailRoutesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryTrailsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryTrailsConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryUsersArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryUsersConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type RoleInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
-  permissions?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  type?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
-  users?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  permissions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  type?: InputMaybe<Scalars['String']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+  users?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type TrailInput = {
-  certificate?: Maybe<Scalars['ID']>;
-  created_by?: Maybe<Scalars['ID']>;
-  finishedAt?: Maybe<Scalars['DateTime']>;
-  inversePaths?: Maybe<Scalars['Boolean']>;
+  certificate?: InputMaybe<Scalars['ID']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  finishedAt?: InputMaybe<Scalars['DateTime']>;
+  inversePaths?: InputMaybe<Scalars['Boolean']>;
   modality: Enum_Trails_Modality;
-  routes?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  routes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   startedAt: Scalars['DateTime'];
-  updated_by?: Maybe<Scalars['ID']>;
-  user?: Maybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+  user?: InputMaybe<Scalars['ID']>;
 };
 
 export type TrailPartInput = {
-  coverImage?: Maybe<Scalars['ID']>;
-  created_by?: Maybe<Scalars['ID']>;
+  coverImage?: InputMaybe<Scalars['ID']>;
+  created_by?: InputMaybe<Scalars['ID']>;
   description: Scalars['String'];
-  difficulty?: Maybe<Enum_Trailparts_Difficulty>;
+  difficulty?: InputMaybe<Enum_Trailparts_Difficulty>;
   distance: Scalars['Float'];
-  fromCheckpoint?: Maybe<Scalars['ID']>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  fromCheckpoint?: InputMaybe<Scalars['ID']>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   name: Scalars['String'];
   slug: Scalars['String'];
   time: Scalars['Time'];
-  toCheckpoint?: Maybe<Scalars['ID']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  toCheckpoint?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type TrailParts = {
@@ -913,10 +972,10 @@ export type TrailParts = {
 
 
 export type TrailPartsImagesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type TrailPartsAggregator = {
@@ -1130,13 +1189,14 @@ export type TrailRouteGroupBy = {
 };
 
 export type TrailRouteInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  finishedAt?: Maybe<Scalars['DateTime']>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  route?: Maybe<Scalars['ID']>;
-  trackedPath?: Maybe<Scalars['JSON']>;
-  trail?: Maybe<Scalars['ID']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  finishedAt?: InputMaybe<Scalars['DateTime']>;
+  mapUrl?: InputMaybe<Scalars['String']>;
+  published_at?: InputMaybe<Scalars['DateTime']>;
+  route?: InputMaybe<Scalars['ID']>;
+  trackedPath?: InputMaybe<Scalars['JSON']>;
+  trail?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type Trails = {
@@ -1155,10 +1215,10 @@ export type Trails = {
 
 
 export type TrailsRoutesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type TrailsAggregator = {
@@ -1265,10 +1325,10 @@ export type UploadFile = {
 
 
 export type UploadFileRelatedArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type UploadFileAggregator = {
@@ -1440,21 +1500,34 @@ export type UploadFileGroupBy = {
 };
 
 export type UserInput = {
-  avatar?: Maybe<Scalars['ID']>;
+  avatar?: InputMaybe<Scalars['ID']>;
   birthdate: Scalars['Date'];
-  blocked?: Maybe<Scalars['Boolean']>;
-  confirmationToken?: Maybe<Scalars['String']>;
-  confirmed?: Maybe<Scalars['Boolean']>;
-  created_by?: Maybe<Scalars['ID']>;
+  blocked?: InputMaybe<Scalars['Boolean']>;
+  businessAddress?: InputMaybe<Scalars['String']>;
+  businessName?: InputMaybe<Scalars['String']>;
+  businessPhone?: InputMaybe<Scalars['String']>;
+  businessType?: InputMaybe<Scalars['String']>;
+  confirmationToken?: InputMaybe<Scalars['String']>;
+  confirmed?: InputMaybe<Scalars['Boolean']>;
+  created_by?: InputMaybe<Scalars['ID']>;
   email: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  provider?: Maybe<Scalars['String']>;
-  resetPasswordToken?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['ID']>;
-  sex?: Maybe<Enum_Userspermissionsuser_Sex>;
-  trails?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  updated_by?: Maybe<Scalars['ID']>;
+  establishments?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  merchantApproved?: InputMaybe<Scalars['Boolean']>;
+  merchantApprovedAt?: InputMaybe<Scalars['DateTime']>;
+  merchantApprovedBy?: InputMaybe<Scalars['ID']>;
+  merchantRejectedReason?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  nickname: Scalars['String'];
+  organizationName?: InputMaybe<Scalars['String']>;
+  organizationType?: InputMaybe<Enum_Userspermissionsuser_Organizationtype>;
+  password?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  resetPasswordToken?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['ID']>;
+  sex?: InputMaybe<Enum_Userspermissionsuser_Sex>;
+  trails?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+  userType?: InputMaybe<Enum_Userspermissionsuser_Usertype>;
   username: Scalars['String'];
 };
 
@@ -1466,7 +1539,7 @@ export type UserPermissionsPasswordPayload = {
 export type UsersPermissionsLoginInput = {
   identifier: Scalars['String'];
   password: Scalars['String'];
-  provider?: Maybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
 };
 
 export type UsersPermissionsLoginPayload = {
@@ -1522,18 +1595,18 @@ export type UsersPermissionsRole = {
 
 
 export type UsersPermissionsRolePermissionsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type UsersPermissionsRoleUsersArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type UsersPermissionsRoleAggregator = {
@@ -1586,25 +1659,46 @@ export type UsersPermissionsUser = {
   avatar?: Maybe<UploadFile>;
   birthdate: Scalars['Date'];
   blocked?: Maybe<Scalars['Boolean']>;
+  businessAddress?: Maybe<Scalars['String']>;
+  businessName?: Maybe<Scalars['String']>;
+  businessPhone?: Maybe<Scalars['String']>;
+  businessType?: Maybe<Scalars['String']>;
   confirmed?: Maybe<Scalars['Boolean']>;
   created_at: Scalars['DateTime'];
   email: Scalars['String'];
+  establishments?: Maybe<Array<Maybe<Establishment>>>;
   id: Scalars['ID'];
+  merchantApproved?: Maybe<Scalars['Boolean']>;
+  merchantApprovedAt?: Maybe<Scalars['DateTime']>;
+  merchantApprovedBy?: Maybe<UsersPermissionsUser>;
+  merchantRejectedReason?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  nickname: Scalars['String'];
+  organizationName?: Maybe<Scalars['String']>;
+  organizationType?: Maybe<Enum_Userspermissionsuser_Organizationtype>;
   provider?: Maybe<Scalars['String']>;
   role?: Maybe<UsersPermissionsRole>;
   sex?: Maybe<Enum_Userspermissionsuser_Sex>;
   trails?: Maybe<Array<Maybe<Trails>>>;
   updated_at: Scalars['DateTime'];
+  userType: Enum_Userspermissionsuser_Usertype;
   username: Scalars['String'];
 };
 
 
+export type UsersPermissionsUserEstablishmentsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
+};
+
+
 export type UsersPermissionsUserTrailsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Scalars['JSON']>;
 };
 
 export type UsersPermissionsUserAggregator = {
@@ -1638,6 +1732,30 @@ export type UsersPermissionsUserConnectionBlocked = {
   key?: Maybe<Scalars['Boolean']>;
 };
 
+export type UsersPermissionsUserConnectionBusinessAddress = {
+  __typename?: 'UsersPermissionsUserConnectionBusinessAddress';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type UsersPermissionsUserConnectionBusinessName = {
+  __typename?: 'UsersPermissionsUserConnectionBusinessName';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type UsersPermissionsUserConnectionBusinessPhone = {
+  __typename?: 'UsersPermissionsUserConnectionBusinessPhone';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type UsersPermissionsUserConnectionBusinessType = {
+  __typename?: 'UsersPermissionsUserConnectionBusinessType';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
 export type UsersPermissionsUserConnectionConfirmed = {
   __typename?: 'UsersPermissionsUserConnectionConfirmed';
   connection?: Maybe<UsersPermissionsUserConnection>;
@@ -1662,8 +1780,50 @@ export type UsersPermissionsUserConnectionId = {
   key?: Maybe<Scalars['ID']>;
 };
 
+export type UsersPermissionsUserConnectionMerchantApproved = {
+  __typename?: 'UsersPermissionsUserConnectionMerchantApproved';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['Boolean']>;
+};
+
+export type UsersPermissionsUserConnectionMerchantApprovedAt = {
+  __typename?: 'UsersPermissionsUserConnectionMerchantApprovedAt';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type UsersPermissionsUserConnectionMerchantApprovedBy = {
+  __typename?: 'UsersPermissionsUserConnectionMerchantApprovedBy';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
+export type UsersPermissionsUserConnectionMerchantRejectedReason = {
+  __typename?: 'UsersPermissionsUserConnectionMerchantRejectedReason';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
 export type UsersPermissionsUserConnectionName = {
   __typename?: 'UsersPermissionsUserConnectionName';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type UsersPermissionsUserConnectionNickname = {
+  __typename?: 'UsersPermissionsUserConnectionNickname';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type UsersPermissionsUserConnectionOrganizationName = {
+  __typename?: 'UsersPermissionsUserConnectionOrganizationName';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type UsersPermissionsUserConnectionOrganizationType = {
+  __typename?: 'UsersPermissionsUserConnectionOrganizationType';
   connection?: Maybe<UsersPermissionsUserConnection>;
   key?: Maybe<Scalars['String']>;
 };
@@ -1692,6 +1852,12 @@ export type UsersPermissionsUserConnectionUpdated_At = {
   key?: Maybe<Scalars['DateTime']>;
 };
 
+export type UsersPermissionsUserConnectionUserType = {
+  __typename?: 'UsersPermissionsUserConnectionUserType';
+  connection?: Maybe<UsersPermissionsUserConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
 export type UsersPermissionsUserConnectionUsername = {
   __typename?: 'UsersPermissionsUserConnectionUsername';
   connection?: Maybe<UsersPermissionsUserConnection>;
@@ -1703,20 +1869,32 @@ export type UsersPermissionsUserGroupBy = {
   avatar?: Maybe<Array<Maybe<UsersPermissionsUserConnectionAvatar>>>;
   birthdate?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBirthdate>>>;
   blocked?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBlocked>>>;
+  businessAddress?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBusinessAddress>>>;
+  businessName?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBusinessName>>>;
+  businessPhone?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBusinessPhone>>>;
+  businessType?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBusinessType>>>;
   confirmed?: Maybe<Array<Maybe<UsersPermissionsUserConnectionConfirmed>>>;
   created_at?: Maybe<Array<Maybe<UsersPermissionsUserConnectionCreated_At>>>;
   email?: Maybe<Array<Maybe<UsersPermissionsUserConnectionEmail>>>;
   id?: Maybe<Array<Maybe<UsersPermissionsUserConnectionId>>>;
+  merchantApproved?: Maybe<Array<Maybe<UsersPermissionsUserConnectionMerchantApproved>>>;
+  merchantApprovedAt?: Maybe<Array<Maybe<UsersPermissionsUserConnectionMerchantApprovedAt>>>;
+  merchantApprovedBy?: Maybe<Array<Maybe<UsersPermissionsUserConnectionMerchantApprovedBy>>>;
+  merchantRejectedReason?: Maybe<Array<Maybe<UsersPermissionsUserConnectionMerchantRejectedReason>>>;
   name?: Maybe<Array<Maybe<UsersPermissionsUserConnectionName>>>;
+  nickname?: Maybe<Array<Maybe<UsersPermissionsUserConnectionNickname>>>;
+  organizationName?: Maybe<Array<Maybe<UsersPermissionsUserConnectionOrganizationName>>>;
+  organizationType?: Maybe<Array<Maybe<UsersPermissionsUserConnectionOrganizationType>>>;
   provider?: Maybe<Array<Maybe<UsersPermissionsUserConnectionProvider>>>;
   role?: Maybe<Array<Maybe<UsersPermissionsUserConnectionRole>>>;
   sex?: Maybe<Array<Maybe<UsersPermissionsUserConnectionSex>>>;
   updated_at?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUpdated_At>>>;
+  userType?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUserType>>>;
   username?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUsername>>>;
 };
 
 export type CreateCertificateInput = {
-  data?: Maybe<CertificateInput>;
+  data?: InputMaybe<CertificateInput>;
 };
 
 export type CreateCertificatePayload = {
@@ -1725,7 +1903,7 @@ export type CreateCertificatePayload = {
 };
 
 export type CreateCheckpointInput = {
-  data?: Maybe<CheckpointInput>;
+  data?: InputMaybe<CheckpointInput>;
 };
 
 export type CreateCheckpointPayload = {
@@ -1734,7 +1912,7 @@ export type CreateCheckpointPayload = {
 };
 
 export type CreateEstablishmentInput = {
-  data?: Maybe<EstablishmentInput>;
+  data?: InputMaybe<EstablishmentInput>;
 };
 
 export type CreateEstablishmentPayload = {
@@ -1743,7 +1921,7 @@ export type CreateEstablishmentPayload = {
 };
 
 export type CreateRoleInput = {
-  data?: Maybe<RoleInput>;
+  data?: InputMaybe<RoleInput>;
 };
 
 export type CreateRolePayload = {
@@ -1752,11 +1930,11 @@ export type CreateRolePayload = {
 };
 
 export type CreateTrailInput = {
-  data?: Maybe<TrailInput>;
+  data?: InputMaybe<TrailInput>;
 };
 
 export type CreateTrailPartInput = {
-  data?: Maybe<TrailPartInput>;
+  data?: InputMaybe<TrailPartInput>;
 };
 
 export type CreateTrailPartPayload = {
@@ -1770,7 +1948,7 @@ export type CreateTrailPayload = {
 };
 
 export type CreateTrailRouteInput = {
-  data?: Maybe<TrailRouteInput>;
+  data?: InputMaybe<TrailRouteInput>;
 };
 
 export type CreateTrailRoutePayload = {
@@ -1779,7 +1957,7 @@ export type CreateTrailRoutePayload = {
 };
 
 export type CreateUserInput = {
-  data?: Maybe<UserInput>;
+  data?: InputMaybe<UserInput>;
 };
 
 export type CreateUserPayload = {
@@ -1788,7 +1966,7 @@ export type CreateUserPayload = {
 };
 
 export type DeleteCertificateInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteCertificatePayload = {
@@ -1797,7 +1975,7 @@ export type DeleteCertificatePayload = {
 };
 
 export type DeleteCheckpointInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteCheckpointPayload = {
@@ -1806,7 +1984,7 @@ export type DeleteCheckpointPayload = {
 };
 
 export type DeleteEstablishmentInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteEstablishmentPayload = {
@@ -1815,7 +1993,7 @@ export type DeleteEstablishmentPayload = {
 };
 
 export type DeleteFileInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteFilePayload = {
@@ -1824,7 +2002,7 @@ export type DeleteFilePayload = {
 };
 
 export type DeleteRoleInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteRolePayload = {
@@ -1833,11 +2011,11 @@ export type DeleteRolePayload = {
 };
 
 export type DeleteTrailInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteTrailPartInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteTrailPartPayload = {
@@ -1851,7 +2029,7 @@ export type DeleteTrailPayload = {
 };
 
 export type DeleteTrailRouteInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteTrailRoutePayload = {
@@ -1860,7 +2038,7 @@ export type DeleteTrailRoutePayload = {
 };
 
 export type DeleteUserInput = {
-  where?: Maybe<InputId>;
+  where?: InputMaybe<InputId>;
 };
 
 export type DeleteUserPayload = {
@@ -1869,147 +2047,167 @@ export type DeleteUserPayload = {
 };
 
 export type EditCertificateInput = {
-  code?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  file?: Maybe<Scalars['String']>;
-  trail?: Maybe<Scalars['ID']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  code?: InputMaybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  file?: InputMaybe<Scalars['String']>;
+  trail?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditCheckpointInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  estabelecimentos?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  location?: Maybe<EditComponentGeneralLocationInput>;
-  name?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  estabelecimentos?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  location?: InputMaybe<EditComponentGeneralLocationInput>;
+  name?: InputMaybe<Scalars['String']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditComponentGeneralAvaliationInput = {
-  comment?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  rate?: Maybe<Scalars['Float']>;
-  user?: Maybe<Scalars['ID']>;
+  comment?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  rate?: InputMaybe<Scalars['Float']>;
+  user?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditComponentGeneralLocationInput = {
-  id?: Maybe<Scalars['ID']>;
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
+  id?: InputMaybe<Scalars['ID']>;
+  x?: InputMaybe<Scalars['Float']>;
+  y?: InputMaybe<Scalars['Float']>;
 };
 
 export type EditComponentGeneralPlaceInput = {
-  id?: Maybe<Scalars['ID']>;
-  location?: Maybe<EditComponentGeneralLocationInput>;
-  name?: Maybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  location?: InputMaybe<EditComponentGeneralLocationInput>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type EditEstablishmentInput = {
-  address?: Maybe<Scalars['String']>;
-  category?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  email?: Maybe<Scalars['String']>;
-  location?: Maybe<EditComponentGeneralLocationInput>;
-  name?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  address?: InputMaybe<Scalars['String']>;
+  category?: InputMaybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  isActive?: InputMaybe<Scalars['Boolean']>;
+  location?: InputMaybe<EditComponentGeneralLocationInput>;
+  name?: InputMaybe<Scalars['String']>;
+  openingHours?: InputMaybe<Scalars['String']>;
+  owner?: InputMaybe<Scalars['ID']>;
+  phone?: InputMaybe<Scalars['String']>;
+  services?: InputMaybe<Scalars['JSON']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditFileInput = {
-  alternativeText?: Maybe<Scalars['String']>;
-  caption?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  ext?: Maybe<Scalars['String']>;
-  formats?: Maybe<Scalars['JSON']>;
-  hash?: Maybe<Scalars['String']>;
-  height?: Maybe<Scalars['Int']>;
-  mime?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  previewUrl?: Maybe<Scalars['String']>;
-  provider?: Maybe<Scalars['String']>;
-  provider_metadata?: Maybe<Scalars['JSON']>;
-  related?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  size?: Maybe<Scalars['Float']>;
-  updated_by?: Maybe<Scalars['ID']>;
-  url?: Maybe<Scalars['String']>;
-  width?: Maybe<Scalars['Int']>;
+  alternativeText?: InputMaybe<Scalars['String']>;
+  caption?: InputMaybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  ext?: InputMaybe<Scalars['String']>;
+  formats?: InputMaybe<Scalars['JSON']>;
+  hash?: InputMaybe<Scalars['String']>;
+  height?: InputMaybe<Scalars['Int']>;
+  mime?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  previewUrl?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  provider_metadata?: InputMaybe<Scalars['JSON']>;
+  related?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  size?: InputMaybe<Scalars['Float']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+  url?: InputMaybe<Scalars['String']>;
+  width?: InputMaybe<Scalars['Int']>;
 };
 
 export type EditLocaleInput = {
-  code?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  code?: InputMaybe<Scalars['String']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditRoleInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  permissions?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  type?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
-  users?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  permissions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  type?: InputMaybe<Scalars['String']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+  users?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type EditTrailInput = {
-  certificate?: Maybe<Scalars['ID']>;
-  created_by?: Maybe<Scalars['ID']>;
-  finishedAt?: Maybe<Scalars['DateTime']>;
-  inversePaths?: Maybe<Scalars['Boolean']>;
-  modality?: Maybe<Enum_Trails_Modality>;
-  routes?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  startedAt?: Maybe<Scalars['DateTime']>;
-  updated_by?: Maybe<Scalars['ID']>;
-  user?: Maybe<Scalars['ID']>;
+  certificate?: InputMaybe<Scalars['ID']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  finishedAt?: InputMaybe<Scalars['DateTime']>;
+  inversePaths?: InputMaybe<Scalars['Boolean']>;
+  modality?: InputMaybe<Enum_Trails_Modality>;
+  routes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  startedAt?: InputMaybe<Scalars['DateTime']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+  user?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditTrailPartInput = {
-  coverImage?: Maybe<Scalars['ID']>;
-  created_by?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
-  difficulty?: Maybe<Enum_Trailparts_Difficulty>;
-  distance?: Maybe<Scalars['Float']>;
-  fromCheckpoint?: Maybe<Scalars['ID']>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  name?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
-  time?: Maybe<Scalars['Time']>;
-  toCheckpoint?: Maybe<Scalars['ID']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  coverImage?: InputMaybe<Scalars['ID']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
+  difficulty?: InputMaybe<Enum_Trailparts_Difficulty>;
+  distance?: InputMaybe<Scalars['Float']>;
+  fromCheckpoint?: InputMaybe<Scalars['ID']>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  name?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+  time?: InputMaybe<Scalars['Time']>;
+  toCheckpoint?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditTrailRouteInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  finishedAt?: Maybe<Scalars['DateTime']>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  route?: Maybe<Scalars['ID']>;
-  trackedPath?: Maybe<Scalars['JSON']>;
-  trail?: Maybe<Scalars['ID']>;
-  updated_by?: Maybe<Scalars['ID']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  finishedAt?: InputMaybe<Scalars['DateTime']>;
+  mapUrl?: InputMaybe<Scalars['String']>;
+  published_at?: InputMaybe<Scalars['DateTime']>;
+  route?: InputMaybe<Scalars['ID']>;
+  trackedPath?: InputMaybe<Scalars['JSON']>;
+  trail?: InputMaybe<Scalars['ID']>;
+  updated_by?: InputMaybe<Scalars['ID']>;
 };
 
 export type EditUserInput = {
-  avatar?: Maybe<Scalars['ID']>;
-  birthdate?: Maybe<Scalars['Date']>;
-  blocked?: Maybe<Scalars['Boolean']>;
-  confirmationToken?: Maybe<Scalars['String']>;
-  confirmed?: Maybe<Scalars['Boolean']>;
-  created_by?: Maybe<Scalars['ID']>;
-  email?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  provider?: Maybe<Scalars['String']>;
-  resetPasswordToken?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['ID']>;
-  sex?: Maybe<Enum_Userspermissionsuser_Sex>;
-  trails?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  updated_by?: Maybe<Scalars['ID']>;
-  username?: Maybe<Scalars['String']>;
+  avatar?: InputMaybe<Scalars['ID']>;
+  birthdate?: InputMaybe<Scalars['Date']>;
+  blocked?: InputMaybe<Scalars['Boolean']>;
+  businessAddress?: InputMaybe<Scalars['String']>;
+  businessName?: InputMaybe<Scalars['String']>;
+  businessPhone?: InputMaybe<Scalars['String']>;
+  businessType?: InputMaybe<Scalars['String']>;
+  confirmationToken?: InputMaybe<Scalars['String']>;
+  confirmed?: InputMaybe<Scalars['Boolean']>;
+  created_by?: InputMaybe<Scalars['ID']>;
+  email?: InputMaybe<Scalars['String']>;
+  establishments?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  merchantApproved?: InputMaybe<Scalars['Boolean']>;
+  merchantApprovedAt?: InputMaybe<Scalars['DateTime']>;
+  merchantApprovedBy?: InputMaybe<Scalars['ID']>;
+  merchantRejectedReason?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  nickname?: InputMaybe<Scalars['String']>;
+  organizationName?: InputMaybe<Scalars['String']>;
+  organizationType?: InputMaybe<Enum_Userspermissionsuser_Organizationtype>;
+  password?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
+  resetPasswordToken?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['ID']>;
+  sex?: InputMaybe<Enum_Userspermissionsuser_Sex>;
+  trails?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  updated_by?: InputMaybe<Scalars['ID']>;
+  userType?: InputMaybe<Enum_Userspermissionsuser_Usertype>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateCertificateInput = {
-  data?: Maybe<EditCertificateInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditCertificateInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateCertificatePayload = {
@@ -2018,8 +2216,8 @@ export type UpdateCertificatePayload = {
 };
 
 export type UpdateCheckpointInput = {
-  data?: Maybe<EditCheckpointInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditCheckpointInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateCheckpointPayload = {
@@ -2028,8 +2226,8 @@ export type UpdateCheckpointPayload = {
 };
 
 export type UpdateEstablishmentInput = {
-  data?: Maybe<EditEstablishmentInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditEstablishmentInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateEstablishmentPayload = {
@@ -2038,8 +2236,8 @@ export type UpdateEstablishmentPayload = {
 };
 
 export type UpdateRoleInput = {
-  data?: Maybe<EditRoleInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditRoleInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateRolePayload = {
@@ -2048,13 +2246,13 @@ export type UpdateRolePayload = {
 };
 
 export type UpdateTrailInput = {
-  data?: Maybe<EditTrailInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditTrailInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateTrailPartInput = {
-  data?: Maybe<EditTrailPartInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditTrailPartInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateTrailPartPayload = {
@@ -2068,8 +2266,8 @@ export type UpdateTrailPayload = {
 };
 
 export type UpdateTrailRouteInput = {
-  data?: Maybe<EditTrailRouteInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditTrailRouteInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateTrailRoutePayload = {
@@ -2078,8 +2276,8 @@ export type UpdateTrailRoutePayload = {
 };
 
 export type UpdateUserInput = {
-  data?: Maybe<EditUserInput>;
-  where?: Maybe<InputId>;
+  data?: InputMaybe<EditUserInput>;
+  where?: InputMaybe<InputId>;
 };
 
 export type UpdateUserPayload = {
@@ -2093,10 +2291,11 @@ export type CreateUserMutationVariables = Exact<{
   password: Scalars['String'];
   birthdate: Scalars['Date'];
   sex: Enum_Userspermissionsuser_Sex;
+  userType?: InputMaybe<Enum_Userspermissionsuser_Usertype>;
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: Maybe<{ __typename?: 'createUserPayload', user?: Maybe<{ __typename?: 'UsersPermissionsUser', id: string }> }> };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'createUserPayload', user?: { __typename?: 'UsersPermissionsUser', id: string } | null } | null };
 
 export type CreateTrailMutationVariables = Exact<{
   userId: Scalars['ID'];
@@ -2106,7 +2305,7 @@ export type CreateTrailMutationVariables = Exact<{
 }>;
 
 
-export type CreateTrailMutation = { __typename?: 'Mutation', createTrail?: Maybe<{ __typename?: 'createTrailPayload', trail?: Maybe<{ __typename?: 'Trails', id: string }> }> };
+export type CreateTrailMutation = { __typename?: 'Mutation', createTrail?: { __typename?: 'createTrailPayload', trail?: { __typename?: 'Trails', id: string } | null } | null };
 
 export type CreateTrailRouteMutationVariables = Exact<{
   trailId: Scalars['ID'];
@@ -2114,42 +2313,42 @@ export type CreateTrailRouteMutationVariables = Exact<{
 }>;
 
 
-export type CreateTrailRouteMutation = { __typename?: 'Mutation', createTrailRoute?: Maybe<{ __typename?: 'createTrailRoutePayload', trailRoute?: Maybe<{ __typename?: 'TrailRoute', id: string }> }> };
+export type CreateTrailRouteMutation = { __typename?: 'Mutation', createTrailRoute?: { __typename?: 'createTrailRoutePayload', trailRoute?: { __typename?: 'TrailRoute', id: string } | null } | null };
 
 export type UpdateTrailRouteMutationVariables = Exact<{
   trailRouteId: Scalars['ID'];
-  finishedAt?: Maybe<Scalars['DateTime']>;
+  finishedAt?: InputMaybe<Scalars['DateTime']>;
 }>;
 
 
-export type UpdateTrailRouteMutation = { __typename?: 'Mutation', updateTrailRoute?: Maybe<{ __typename?: 'updateTrailRoutePayload', trailRoute?: Maybe<{ __typename?: 'TrailRoute', id: string }> }> };
+export type UpdateTrailRouteMutation = { __typename?: 'Mutation', updateTrailRoute?: { __typename?: 'updateTrailRoutePayload', trailRoute?: { __typename?: 'TrailRoute', id: string } | null } | null };
 
 export type UpdateTrailMutationVariables = Exact<{
   trailId: Scalars['ID'];
-  inversePath?: Maybe<Scalars['Boolean']>;
-  modality?: Maybe<Enum_Trails_Modality>;
+  inversePath?: InputMaybe<Scalars['Boolean']>;
+  modality?: InputMaybe<Enum_Trails_Modality>;
 }>;
 
 
-export type UpdateTrailMutation = { __typename?: 'Mutation', updateTrail?: Maybe<{ __typename?: 'updateTrailPayload', trail?: Maybe<{ __typename?: 'Trails', id: string }> }> };
+export type UpdateTrailMutation = { __typename?: 'Mutation', updateTrail?: { __typename?: 'updateTrailPayload', trail?: { __typename?: 'Trails', id: string } | null } | null };
 
 export type DeleteTrailRouteMutationVariables = Exact<{
   trailRouteId: Scalars['ID'];
 }>;
 
 
-export type DeleteTrailRouteMutation = { __typename?: 'Mutation', deleteTrailRoute?: Maybe<{ __typename?: 'deleteTrailRoutePayload', trailRoute?: Maybe<{ __typename?: 'TrailRoute', id: string }> }> };
+export type DeleteTrailRouteMutation = { __typename?: 'Mutation', deleteTrailRoute?: { __typename?: 'deleteTrailRoutePayload', trailRoute?: { __typename?: 'TrailRoute', id: string } | null } | null };
 
 export type UpdateUserMutationVariables = Exact<{
   userId: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['Date']>;
-  sex?: Maybe<Enum_Userspermissionsuser_Sex>;
-  avatar?: Maybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  birthdate?: InputMaybe<Scalars['Date']>;
+  sex?: InputMaybe<Enum_Userspermissionsuser_Sex>;
+  avatar?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: Maybe<{ __typename?: 'updateUserPayload', user?: Maybe<{ __typename?: 'UsersPermissionsUser', id: string }> }> };
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'updateUserPayload', user?: { __typename?: 'UsersPermissionsUser', id: string } | null } | null };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -2157,14 +2356,14 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'UsersPermissionsLoginPayload', jwt?: Maybe<string>, user: { __typename?: 'UsersPermissionsMe', id: string } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'UsersPermissionsLoginPayload', jwt?: string | null, user: { __typename?: 'UsersPermissionsMe', id: string, username: string, email: string, role?: { __typename?: 'UsersPermissionsMeRole', id: string, name: string, type?: string | null } | null } } };
 
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type ForgotPasswordMutation = { __typename?: 'Mutation', forgotPassword?: Maybe<{ __typename?: 'UserPermissionsPasswordPayload', ok: boolean }> };
+export type ForgotPasswordMutation = { __typename?: 'Mutation', forgotPassword?: { __typename?: 'UserPermissionsPasswordPayload', ok: boolean } | null };
 
 export type ResetPasswordMutationVariables = Exact<{
   code: Scalars['String'];
@@ -2173,26 +2372,26 @@ export type ResetPasswordMutationVariables = Exact<{
 }>;
 
 
-export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword?: Maybe<{ __typename?: 'UsersPermissionsLoginPayload', user: { __typename?: 'UsersPermissionsMe', id: string } }> };
+export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword?: { __typename?: 'UsersPermissionsLoginPayload', user: { __typename?: 'UsersPermissionsMe', id: string } } | null };
 
 export type GetUserQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', user?: Maybe<{ __typename?: 'UsersPermissionsUser', id: string, name?: Maybe<string>, email: string, birthdate: any, sex?: Maybe<Enum_Userspermissionsuser_Sex>, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }>, trails?: Maybe<Array<Maybe<{ __typename?: 'Trails', id: string, inversePaths: boolean, modality: Enum_Trails_Modality, startedAt: any, finishedAt?: Maybe<any>, certificate?: Maybe<{ __typename?: 'Certificate', file?: Maybe<string> }>, routes?: Maybe<Array<Maybe<{ __typename?: 'TrailRoute', id: string, finishedAt?: Maybe<any>, created_at: any, route?: Maybe<{ __typename?: 'TrailParts', id: string }> }>>> }>>> }> };
+export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'UsersPermissionsUser', id: string, name?: string | null, email: string, birthdate: any, sex?: Enum_Userspermissionsuser_Sex | null, userType: Enum_Userspermissionsuser_Usertype, merchantApproved?: boolean | null, merchantApprovedAt?: any | null, merchantRejectedReason?: string | null, businessName?: string | null, businessType?: string | null, businessAddress?: string | null, businessPhone?: string | null, merchantApprovedBy?: { __typename?: 'UsersPermissionsUser', id: string, name?: string | null } | null, avatar?: { __typename?: 'UploadFile', url: string } | null, trails?: Array<{ __typename?: 'Trails', id: string, inversePaths: boolean, modality: Enum_Trails_Modality, startedAt: any, finishedAt?: any | null, certificate?: { __typename?: 'Certificate', file?: string | null } | null, routes?: Array<{ __typename?: 'TrailRoute', id: string, finishedAt?: any | null, created_at: any, route?: { __typename?: 'TrailParts', id: string } | null } | null> | null } | null> | null } | null };
 
 export type GetRoutesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetRoutesQuery = { __typename?: 'Query', trailParts?: Maybe<Array<Maybe<{ __typename?: 'TrailParts', id: string, name: string, difficulty: Enum_Trailparts_Difficulty, time: any, distance: number, description: string, slug: string, coverImage?: Maybe<{ __typename?: 'UploadFile', url: string, width?: Maybe<number>, height?: Maybe<number> }>, images?: Maybe<Array<Maybe<{ __typename?: 'UploadFile', url: string, width?: Maybe<number>, height?: Maybe<number> }>>>, fromCheckpoint?: Maybe<{ __typename?: 'Checkpoints', id: string, name: string, location?: Maybe<{ __typename?: 'ComponentGeneralLocation', x: number, y: number }>, estabelecimentos?: Maybe<Array<Maybe<{ __typename?: 'Establishment', id: string, name: string, address?: Maybe<string>, email?: Maybe<string>, phone?: Maybe<string>, category: string, location?: Maybe<{ __typename?: 'ComponentGeneralLocation', x: number, y: number }> }>>> }>, toCheckpoint?: Maybe<{ __typename?: 'Checkpoints', id: string, name: string, location?: Maybe<{ __typename?: 'ComponentGeneralLocation', x: number, y: number }>, estabelecimentos?: Maybe<Array<Maybe<{ __typename?: 'Establishment', id: string, name: string, address?: Maybe<string>, email?: Maybe<string>, phone?: Maybe<string>, category: string, location?: Maybe<{ __typename?: 'ComponentGeneralLocation', x: number, y: number }> }>>> }> }>>> };
+export type GetRoutesQuery = { __typename?: 'Query', trailParts?: Array<{ __typename?: 'TrailParts', id: string, name: string, difficulty: Enum_Trailparts_Difficulty, time: any, distance: number, description: string, slug: string, coverImage?: { __typename?: 'UploadFile', url: string, width?: number | null, height?: number | null } | null, images?: Array<{ __typename?: 'UploadFile', url: string, width?: number | null, height?: number | null } | null> | null, fromCheckpoint?: { __typename?: 'Checkpoints', id: string, name: string, location?: { __typename?: 'ComponentGeneralLocation', x: number, y: number } | null, estabelecimentos?: Array<{ __typename?: 'Establishment', id: string, name: string, address?: string | null, email?: string | null, phone?: string | null, category: string, location?: { __typename?: 'ComponentGeneralLocation', x: number, y: number } | null } | null> | null } | null, toCheckpoint?: { __typename?: 'Checkpoints', id: string, name: string, location?: { __typename?: 'ComponentGeneralLocation', x: number, y: number } | null, estabelecimentos?: Array<{ __typename?: 'Establishment', id: string, name: string, address?: string | null, email?: string | null, phone?: string | null, category: string, location?: { __typename?: 'ComponentGeneralLocation', x: number, y: number } | null } | null> | null } | null } | null> | null };
 
 export type GenerateCertificateMutationVariables = Exact<{
   trailId: Scalars['ID'];
 }>;
 
 
-export type GenerateCertificateMutation = { __typename?: 'Mutation', createCertificate?: Maybe<{ __typename?: 'createCertificatePayload', certificate?: Maybe<{ __typename?: 'Certificate', file?: Maybe<string> }> }> };
+export type GenerateCertificateMutation = { __typename?: 'Mutation', createCertificate?: { __typename?: 'createCertificatePayload', certificate?: { __typename?: 'Certificate', file?: string | null } | null } | null };
 
 export type UploadMutationVariables = Exact<{
   file: Scalars['Upload'];
@@ -2203,9 +2402,9 @@ export type UploadMutation = { __typename?: 'Mutation', upload: { __typename?: '
 
 
 export const CreateUserDocument = `
-    mutation createUser($name: String!, $email: String!, $password: String!, $birthdate: Date!, $sex: ENUM_USERSPERMISSIONSUSER_SEX!) {
+    mutation createUser($name: String!, $email: String!, $password: String!, $birthdate: Date!, $sex: ENUM_USERSPERMISSIONSUSER_SEX!, $userType: ENUM_USERSPERMISSIONSUSER_USERTYPE) {
   createUser(
-    input: {data: {name: $name, username: $email, email: $email, password: $password, birthdate: $birthdate, sex: $sex}}
+    input: {data: {name: $name, username: $email, nickname: $name, email: $email, password: $password, birthdate: $birthdate, sex: $sex, userType: $userType}}
   ) {
     user {
       id
@@ -2216,8 +2415,9 @@ export const CreateUserDocument = `
 export const useCreateUserMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<CreateUserMutation, TError, CreateUserMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<CreateUserMutation, TError, CreateUserMutationVariables, TContext>) =>
     useMutation<CreateUserMutation, TError, CreateUserMutationVariables, TContext>(
+      ['createUser'],
       (variables?: CreateUserMutationVariables) => fetcher<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, variables)(),
       options
     );
@@ -2235,8 +2435,9 @@ export const CreateTrailDocument = `
 export const useCreateTrailMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<CreateTrailMutation, TError, CreateTrailMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<CreateTrailMutation, TError, CreateTrailMutationVariables, TContext>) =>
     useMutation<CreateTrailMutation, TError, CreateTrailMutationVariables, TContext>(
+      ['createTrail'],
       (variables?: CreateTrailMutationVariables) => fetcher<CreateTrailMutation, CreateTrailMutationVariables>(CreateTrailDocument, variables)(),
       options
     );
@@ -2252,8 +2453,9 @@ export const CreateTrailRouteDocument = `
 export const useCreateTrailRouteMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<CreateTrailRouteMutation, TError, CreateTrailRouteMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<CreateTrailRouteMutation, TError, CreateTrailRouteMutationVariables, TContext>) =>
     useMutation<CreateTrailRouteMutation, TError, CreateTrailRouteMutationVariables, TContext>(
+      ['createTrailRoute'],
       (variables?: CreateTrailRouteMutationVariables) => fetcher<CreateTrailRouteMutation, CreateTrailRouteMutationVariables>(CreateTrailRouteDocument, variables)(),
       options
     );
@@ -2271,8 +2473,9 @@ export const UpdateTrailRouteDocument = `
 export const useUpdateTrailRouteMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<UpdateTrailRouteMutation, TError, UpdateTrailRouteMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<UpdateTrailRouteMutation, TError, UpdateTrailRouteMutationVariables, TContext>) =>
     useMutation<UpdateTrailRouteMutation, TError, UpdateTrailRouteMutationVariables, TContext>(
+      ['updateTrailRoute'],
       (variables?: UpdateTrailRouteMutationVariables) => fetcher<UpdateTrailRouteMutation, UpdateTrailRouteMutationVariables>(UpdateTrailRouteDocument, variables)(),
       options
     );
@@ -2290,8 +2493,9 @@ export const UpdateTrailDocument = `
 export const useUpdateTrailMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<UpdateTrailMutation, TError, UpdateTrailMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<UpdateTrailMutation, TError, UpdateTrailMutationVariables, TContext>) =>
     useMutation<UpdateTrailMutation, TError, UpdateTrailMutationVariables, TContext>(
+      ['updateTrail'],
       (variables?: UpdateTrailMutationVariables) => fetcher<UpdateTrailMutation, UpdateTrailMutationVariables>(UpdateTrailDocument, variables)(),
       options
     );
@@ -2307,8 +2511,9 @@ export const DeleteTrailRouteDocument = `
 export const useDeleteTrailRouteMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<DeleteTrailRouteMutation, TError, DeleteTrailRouteMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<DeleteTrailRouteMutation, TError, DeleteTrailRouteMutationVariables, TContext>) =>
     useMutation<DeleteTrailRouteMutation, TError, DeleteTrailRouteMutationVariables, TContext>(
+      ['deleteTrailRoute'],
       (variables?: DeleteTrailRouteMutationVariables) => fetcher<DeleteTrailRouteMutation, DeleteTrailRouteMutationVariables>(DeleteTrailRouteDocument, variables)(),
       options
     );
@@ -2326,8 +2531,9 @@ export const UpdateUserDocument = `
 export const useUpdateUserMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>) =>
     useMutation<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>(
+      ['updateUser'],
       (variables?: UpdateUserMutationVariables) => fetcher<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, variables)(),
       options
     );
@@ -2337,6 +2543,13 @@ export const LoginDocument = `
     jwt
     user {
       id
+      username
+      email
+      role {
+        id
+        name
+        type
+      }
     }
   }
 }
@@ -2344,8 +2557,9 @@ export const LoginDocument = `
 export const useLoginMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<LoginMutation, TError, LoginMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<LoginMutation, TError, LoginMutationVariables, TContext>) =>
     useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
+      ['login'],
       (variables?: LoginMutationVariables) => fetcher<LoginMutation, LoginMutationVariables>(LoginDocument, variables)(),
       options
     );
@@ -2359,8 +2573,9 @@ export const ForgotPasswordDocument = `
 export const useForgotPasswordMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<ForgotPasswordMutation, TError, ForgotPasswordMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<ForgotPasswordMutation, TError, ForgotPasswordMutationVariables, TContext>) =>
     useMutation<ForgotPasswordMutation, TError, ForgotPasswordMutationVariables, TContext>(
+      ['forgotPassword'],
       (variables?: ForgotPasswordMutationVariables) => fetcher<ForgotPasswordMutation, ForgotPasswordMutationVariables>(ForgotPasswordDocument, variables)(),
       options
     );
@@ -2380,8 +2595,9 @@ export const ResetPasswordDocument = `
 export const useResetPasswordMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<ResetPasswordMutation, TError, ResetPasswordMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<ResetPasswordMutation, TError, ResetPasswordMutationVariables, TContext>) =>
     useMutation<ResetPasswordMutation, TError, ResetPasswordMutationVariables, TContext>(
+      ['resetPassword'],
       (variables?: ResetPasswordMutationVariables) => fetcher<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, variables)(),
       options
     );
@@ -2393,6 +2609,18 @@ export const GetUserDocument = `
     email
     birthdate
     sex
+    userType
+    merchantApproved
+    merchantApprovedBy {
+      id
+      name
+    }
+    merchantApprovedAt
+    merchantRejectedReason
+    businessName
+    businessType
+    businessAddress
+    businessPhone
     avatar {
       url
     }
@@ -2421,9 +2649,9 @@ export const useGetUserQuery = <
       TData = GetUserQuery,
       TError = unknown
     >(
-      variables: GetUserQueryVariables, 
+      variables: GetUserQueryVariables,
       options?: UseQueryOptions<GetUserQuery, TError, TData>
-    ) => 
+    ) =>
     useQuery<GetUserQuery, TError, TData>(
       ['getUser', variables],
       fetcher<GetUserQuery, GetUserQueryVariables>(GetUserDocument, variables),
@@ -2496,9 +2724,9 @@ export const useGetRoutesQuery = <
       TData = GetRoutesQuery,
       TError = unknown
     >(
-      variables?: GetRoutesQueryVariables, 
+      variables?: GetRoutesQueryVariables,
       options?: UseQueryOptions<GetRoutesQuery, TError, TData>
-    ) => 
+    ) =>
     useQuery<GetRoutesQuery, TError, TData>(
       variables === undefined ? ['getRoutes'] : ['getRoutes', variables],
       fetcher<GetRoutesQuery, GetRoutesQueryVariables>(GetRoutesDocument, variables),
@@ -2516,8 +2744,9 @@ export const GenerateCertificateDocument = `
 export const useGenerateCertificateMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<GenerateCertificateMutation, TError, GenerateCertificateMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<GenerateCertificateMutation, TError, GenerateCertificateMutationVariables, TContext>) =>
     useMutation<GenerateCertificateMutation, TError, GenerateCertificateMutationVariables, TContext>(
+      ['generateCertificate'],
       (variables?: GenerateCertificateMutationVariables) => fetcher<GenerateCertificateMutation, GenerateCertificateMutationVariables>(GenerateCertificateDocument, variables)(),
       options
     );
@@ -2532,8 +2761,9 @@ export const UploadDocument = `
 export const useUploadMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<UploadMutation, TError, UploadMutationVariables, TContext>) => 
+    >(options?: UseMutationOptions<UploadMutation, TError, UploadMutationVariables, TContext>) =>
     useMutation<UploadMutation, TError, UploadMutationVariables, TContext>(
+      ['upload'],
       (variables?: UploadMutationVariables) => fetcher<UploadMutation, UploadMutationVariables>(UploadDocument, variables)(),
       options
     );

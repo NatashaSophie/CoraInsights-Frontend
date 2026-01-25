@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import Logo from '@/assets/Logo';
 import { useMerchantAuth } from '@/hooks/authByRole';
@@ -9,6 +10,15 @@ import { Main } from '@/templates/Main';
 
 const ComercianteDashboard = () => {
   const { canShowContent } = useMerchantAuth();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+      sessionStorage.clear();
+      router.push('/login');
+    }
+  };
 
   if (!canShowContent) {
     return (
@@ -30,7 +40,13 @@ const ComercianteDashboard = () => {
       <div className="flex h-full flex-col items-center p-6 overflow-y-auto" id="scroll-container">
         <div className="w-full max-w-6xl">
           {/* Header */}
-          <div className="flex flex-col items-center mb-8">
+          <div className="flex flex-col items-center mb-8 relative">
+            <button
+              onClick={handleLogout}
+              className="absolute top-0 right-0 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            >
+              🚪 Sair
+            </button>
             <Logo />
             <h1 className="text-2xl font-bold text-white mt-4">
               Área do Comerciante
@@ -54,10 +70,10 @@ const ComercianteDashboard = () => {
                 </a>
               </Link>
 
-              <Link href="/comerciante/novo-empreendimento">
+              <Link href="/comerciante/novo-estabelecimento">
                 <a className="bg-white/10 backdrop-blur-md rounded-lg p-6 shadow-lg hover:bg-white/20 transition-all">
                   <h3 className="text-white text-lg font-semibold mb-2">
-                    ➕ Cadastrar Empreendimento
+                    ➕ Cadastrar Estabelecimento
                   </h3>
                   <p className="text-white/70 text-sm">
                     Adicione um novo estabelecimento

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import Logo from '@/assets/Logo';
 import { useManagerAuth } from '@/hooks/authByRole';
@@ -9,6 +10,15 @@ import { Main } from '@/templates/Main';
 
 const GestorDashboard = () => {
   const { canShowContent } = useManagerAuth();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+      sessionStorage.clear();
+      router.push('/login');
+    }
+  };
 
   if (!canShowContent) {
     return (
@@ -30,7 +40,13 @@ const GestorDashboard = () => {
       <div className="flex h-full flex-col items-center p-6 overflow-y-auto" id="scroll-container">
         <div className="w-full max-w-6xl">
           {/* Header */}
-          <div className="flex flex-col items-center mb-8">
+          <div className="flex flex-col items-center mb-8 relative">
+            <button
+              onClick={handleLogout}
+              className="absolute top-0 right-0 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            >
+              🚪 Sair
+            </button>
             <Logo />
             <h1 className="text-2xl font-bold text-white mt-4">
               Área do Gestor

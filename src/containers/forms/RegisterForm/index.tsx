@@ -63,10 +63,6 @@ const RegisterForm: React.FC = () => {
         birthdate: '',
         sex: '',
         userType: 'pilgrim',
-        organizationType: '',
-        organizationName: '',
-        businessName: '',
-        businessType: '',
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
@@ -117,7 +113,8 @@ const RegisterForm: React.FC = () => {
             {values.userType === 'merchant' && (
               <p className="text-white/70 text-xs mt-2">
                 ⚠️ Seu cadastro como comerciante precisará ser aprovado por um gestor.
-                Até a aprovação, você terá acesso apenas às funcionalidades de peregrino.
+                Após a aprovação, você poderá cadastrar seus estabelecimentos.
+                Até lá, você terá acesso apenas às funcionalidades de peregrino.
               </p>
             )}
           </div>
@@ -159,42 +156,8 @@ const RegisterForm: React.FC = () => {
             </>
           )}
 
-          {/* Campos Específicos para Comerciante */}
-          {values.userType === 'merchant' && (
-            <>
-              <div className="bg-white/10 rounded-lg p-4 mb-4">
-                <h3 className="text-white font-semibold mb-3">
-                  Dados do Estabelecimento
-                </h3>
-                <div className="space-y-4">
-                  <TextField
-                    type="text"
-                    name="businessName"
-                    label="Nome do Empreendimento *"
-                    rightIcon="account"
-                  />
-                  <TextField
-                    type="text"
-                    name="businessType"
-                    label="Tipo de Negócio (ex: Restaurante, Pousada) *"
-                    rightIcon="account"
-                  />
-                  <TextField
-                    type="text"
-                    name="businessAddress"
-                    label="Endereço do Estabelecimento"
-                    rightIcon="account"
-                  />
-                  <TextField
-                    type="text"
-                    name="businessPhone"
-                    label="Telefone de Contato"
-                    rightIcon="account"
-                  />
-                </div>
-              </div>
-            </>
-          )}
+          {/* Campos Específicos para Comerciante - REMOVIDOS */}
+          {/* Estabelecimentos devem ser cadastrados após aprovação na página específica */}
 
           <TextField
             type="password"
