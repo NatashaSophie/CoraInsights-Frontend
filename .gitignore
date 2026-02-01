@@ -47,3 +47,11 @@ local
 
 # Capacitor
 capacitor.config.json
+
+# Python venv
+.venv
+venv/
+
+# Backup files
+*.backup
+*.bak
